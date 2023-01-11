@@ -21,6 +21,7 @@ RUN R -e "install.packages(c('anndata', 'xml2', 'tidyverse', 'dplyr', 'Matrix', 
 RUN R -e "install.packages('BiocManager')"
 RUN R -e 'BiocManager::install("DEBrowser")' 
 RUN R -e 'BiocManager::install(c("SingleCellExperiment", "zellkonverter", "limma", "UCell", "scuttle", "SingleR", "celldex"))'
+RUN R -e "install.packages('devtools')"
 RUN R -e 'devtools::install_github("mojaveazure/seurat-disk", upgrade = "always")'
 RUN R -e 'devtools::install_github("umms-biocore/markdownapp")'
 RUN R -e 'remotes::install_github("chris-mcginnis-ucsf/DoubletFinder", upgrade = F)'
