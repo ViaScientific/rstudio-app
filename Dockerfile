@@ -19,7 +19,7 @@ RUN R -e "install.packages(c('knitr', 'rmarkdown', 'curl', 'httr'))"
 RUN R -e "install.packages('Seurat')"
 RUN R -e "install.packages(c('anndata', 'xml2', 'tidyverse', 'dplyr', 'Matrix', 'scales', 'RCurl', 'svglite', 'patchwork', 'readr', 'ggpubr', 'DT', 'remotes'))"
 RUN R -e "install.packages('BiocManager')"
-RUN R -e 'BiocManager::install("DEBrowser")' 
+RUN R -e 'BiocManager::install("debrowser")' 
 RUN R -e 'BiocManager::install(c("SingleCellExperiment", "zellkonverter", "limma", "UCell", "scuttle", "SingleR", "celldex"))'
 RUN R -e "install.packages('devtools')"
 RUN R -e 'devtools::install_github("mojaveazure/seurat-disk", upgrade = "always")'
