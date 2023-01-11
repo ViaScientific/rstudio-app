@@ -1,2 +1,4 @@
-# rstudio-app
-RStudio runs with R 4.2.2
+# Running RStudio inside ShinyProxy
+
+**R Version**: 4.2.2
+
