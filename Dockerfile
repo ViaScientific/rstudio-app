@@ -10,7 +10,7 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 RUN apt-get update --fix-missing && \
     apt-get install -y vim wget bzip2 ca-certificates curl git \
-    libtbb-dev gcc g++ libcairo2-dev pandoc cargo \
+    libtbb-dev gcc g++ libcairo2-dev pandoc cargo libglpk-dev \
     libcurl4-openssl-dev libssl-dev libxml2-dev cmake \              
     texlive-base texlive-latex-base texlive-fonts-recommended \
     libfontconfig1-dev libcairo2-dev libhdf5-dev libmagick++-dev
