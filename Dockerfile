@@ -25,4 +25,5 @@ RUN R -e "install.packages('devtools')"
 RUN R -e 'devtools::install_github("mojaveazure/seurat-disk", upgrade = "always")'
 RUN R -e 'devtools::install_github("umms-biocore/markdownapp")'
 RUN R -e 'remotes::install_github("chris-mcginnis-ucsf/DoubletFinder", upgrade = F)'
+RUN R -e "install.packages('shinybusy')"
 
