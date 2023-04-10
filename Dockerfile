@@ -16,10 +16,9 @@ RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_r
 RUN apt install -y r-base r-base-core r-recommended r-base-dev
 RUN cp /usr/bin/R* /usr/local/bin/. 
 
-RUN R -e "install.packages(c('BiocManager', 'devtools', 'knitr', 'rmarkdown', 'curl', 'httr', 'tidyverse', 'ggrepel', 'ggbeeswarm', 'pheatmap', 'scales', 'Rcurl', 'DT'))"
+RUN R -e "install.packages(c('BiocManager', 'devtools', 'knitr', 'rmarkdown', 'markdown', 'curl', 'httr', 'tidyverse', 'ggrepel', 'ggbeeswarm', 'pheatmap', 'scales', 'Rcurl', 'DT'))"
 RUN R -e "BiocManager::install(version = '3.16')"
 RUN R -e "BiocManager::install(c('DESeq2', 'debrowser'))"
-RUN R -e 'devtools::install_github("umms-biocore/debrowser")'
 
 
 
