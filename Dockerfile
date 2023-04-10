@@ -8,7 +8,8 @@ RUN apt-get update --fix-missing && \
     libtbb-dev gcc g++ libcairo2-dev pandoc cargo libglpk-dev \
     libcurl4-openssl-dev libssl-dev libxml2-dev cmake \              
     texlive-base texlive-latex-base texlive-fonts-recommended \
-    libfontconfig1-dev libcairo2-dev libhdf5-dev libmagick++-dev
+    libfontconfig1-dev libcairo2-dev libhdf5-dev libmagick++-dev \
+    libharfbuzz-dev libfribidi-dev
 RUN apt install -y --no-install-recommends software-properties-common dirmngr
 RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
 RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
