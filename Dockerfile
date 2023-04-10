@@ -1,10 +1,5 @@
-FROM rocker/rstudio:4.0.5
-# NB: this file is only used by rocker if the env var DISABLE_AUTH: true is specified in the application.yml
-RUN echo "www-frame-origin=same" >> /etc/rstudio/disable_auth_rserver.conf
-RUN echo "www-verify-user-agent=0" >> /etc/rstudio/disable_auth_rserver.conf
-
-ADD userconf.sh /rocker_scripts/userconf.sh
-ADD userconf.sh /etc/cont-init.d/userconf
+FROM openanalytics/shinyproxy-rstudio-ide-demo:2021.09.2_382__4.1.2
+LABEL author="alper@viascientific.com" description="Docker image containing all requirements for the Via Scientific DESeq analysis module and RStudio"
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
@@ -14,15 +9,16 @@ RUN apt-get update --fix-missing && \
     libcurl4-openssl-dev libssl-dev libxml2-dev cmake \              
     texlive-base texlive-latex-base texlive-fonts-recommended \
     libfontconfig1-dev libcairo2-dev libhdf5-dev libmagick++-dev
+RUN apt install -y --no-install-recommends software-properties-common dirmngr
+RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+RUN apt install -y r-base r-base-core r-recommended r-base-dev
+RUN cp /usr/bin/R* /usr/local/bin/. 
 
-RUN R -e "install.packages(c('knitr', 'rmarkdown', 'curl', 'httr'))"
-RUN R -e "install.packages('Seurat')"
-RUN R -e "install.packages(c('anndata', 'xml2', 'tidyverse', 'dplyr', 'Matrix', 'scales', 'RCurl', 'svglite', 'patchwork', 'readr', 'ggpubr', 'DT', 'remotes'))"
-RUN R -e "install.packages('BiocManager')"
-RUN R -e 'BiocManager::install("debrowser")' 
-RUN R -e 'BiocManager::install(c("SingleCellExperiment", "zellkonverter", "limma", "UCell", "scuttle", "SingleR", "celldex"))'
-RUN R -e "install.packages('devtools')"
-RUN R -e 'devtools::install_github("mojaveazure/seurat-disk", upgrade = "always")'
-RUN R -e 'devtools::install_github("umms-biocore/markdownapp")'
-RUN R -e 'remotes::install_github("chris-mcginnis-ucsf/DoubletFinder", upgrade = F)'
-RUN R -e "install.packages('shinybusy')"
+RUN R -e "install.packages(c('BiocManager', 'devtools', 'knitr', 'rmarkdown', 'curl', 'httr', 'tidyverse', 'ggrepel', 'ggbeeswarm', 'pheatmap', 'scales', 'Rcurl', 'DT'))"
+RUN R -e "BiocManager::install(version = '3.16')"
+RUN R -e "BiocManager::install(c('DESeq2', 'debrowser'))"
+RUN R -e 'devtools::install_github("umms-biocore/debrowser")'
+
+
+
